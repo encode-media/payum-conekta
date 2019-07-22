@@ -48,11 +48,11 @@ class ConektaGatewayFactory extends GatewayFactory
         if (! $config->offsetExists('payum.api')) {
             $config['payum.default_options'] = [
                 'public_key' => '',
-                'secret_key' => '',
+                'private_key' => '',
                 'sandbox' => true,
             ];
             $config->defaults($config['payum.default_options']);
-            $config['payum.required_options'] = ['public_key', 'secret_key'];
+            $config['payum.required_options'] = ['public_key', 'private_key'];
 
             $config['payum.api'] = static function (ArrayObject $config) {
                 $config->validateNotEmpty($config['payum.required_options']);

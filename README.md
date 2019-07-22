@@ -4,13 +4,13 @@ Payum gateway package for Conekta by [Encode Media](http://encodemedia.com.mx).
 
 ---
 
-# Installation
+## Installation
 
 ```bash
 $ composer require encode-media/payum-conekta
 ```
 
-# Configuration
+## Configuration
 
 ```php
 <?php
@@ -34,6 +34,33 @@ $payum = (new PayumBuilder)
 ;
 ```
 
+## Symfony integration
+
+Register `conekta` Gateway Factory as a service
+
+```yaml
+# config/services.yaml
+
+services:
+    app.payum.conekta_factory:
+        class: Payum\Core\Bridge\Symfony\Builder\GatewayFactoryBuilder
+        arguments: [EncodeMedia\Payum\Conekta\ConektaGatewayFactory]
+        tags:
+            - { name: payum.gateway_factory_builder, factory: conekta }
+```
+
+Configure the gateway
+```yaml
+# config/packages/payum.yaml
+
+payum:
+    gateways:
+        conekta:
+            factory: conekta
+            public_key: key_eYvWV7gSDkNYXsmr
+            private_key: key_eYvWV7gSDkNYXsmr
+```
+
 # Usage
 
 ```php
@@ -49,9 +76,8 @@ $model = new \ArrayObject([
 
 $conektaOxxo->execute(new Capture($model));
 ```
-## Developed by [Encode Media](http://encodemedia.com.mx)
-
-Diseño y desarrollo web a la medida.
+## Developed by
+[Encode Media](http://encodemedia.com.mx) diseño y desarrollo web a la medida.
 
 ## License
 

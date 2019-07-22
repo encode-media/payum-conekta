@@ -33,7 +33,7 @@ class Api
     {
         $this->options = $options;
 
-        Conekta::setApiKey($this->options['public_key']);
+        Conekta::setApiKey($this->options['private_key']);
     }
 
     /**

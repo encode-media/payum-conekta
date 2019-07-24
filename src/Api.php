@@ -21,6 +21,21 @@ use Conekta\Order;
  */
 class Api
 {
+    public const STATUS_PENDING_PAYMENT = 'pending_payment';
+    public const STATUS_DECLINED = 'declined';
+    public const STATUS_EXPIRED = 'expired';
+    public const STATUS_PAID = 'paid';
+    public const STATUS_REFUNDED = 'refunded';
+    public const STATUS_PARTIALLY_REFUNDED = 'partially_refunded';
+    public const STATUS_CHARGED_BACK = 'charged_back';
+    public const STATUS_PRE_AUTHORIZED = 'pre_authorized';
+    public const STATUS_VOIDED = 'voided';
+
+    public const PAYMENT_OXXO_PAY = 'oxxo_cash';
+    public const PAYMENT_CARD = 'card';
+    public const PAYMENT_SPEI = 'spei';
+
+
     /** @var array */
     protected $options = [];
 
@@ -33,7 +48,7 @@ class Api
     {
         $this->options = $options;
 
-        Conekta::setApiKey($this->options['private_key']);
+        $this->addCredentials();
     }
 
     /**
@@ -49,13 +64,21 @@ class Api
         try {
             /** @var Order $order */
             $order = Order::create($data);
-            $result['success'] = true;
-            $result['response'] = $order->getArrayCopy();
+            $result = json_decode($order->__toJSON(), true);
         } catch (\Exception $e) {
-            $result['success'] = false;
-            $result['response'] = $order->getArrayCopy();
+            $result['error'] = sprintf('%s: %s', $e->getCode(), $e->getMessage());
         }
 
         return $result;
+    }
+
+    /**
+     * Set credentials
+     */
+    private function addCredentials(): void
+    {
+        $prefix = $this->options['sandbox'] ? 'sandbox' : 'production';
+
+        Conekta::setApiKey($this->options[$prefix.'_private_key']);
     }
 }

@@ -1,0 +1,166 @@
+<html>
+<head>
+    <title>Conekta Oxxo Payment</title>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700" rel="stylesheet">
+    <style>
+        /* Reset -------------------------------------------------------------------- */
+        * 	 { margin: 0;padding: 0; }
+        body { font-size: 14px; }
+
+        /* OPPS --------------------------------------------------------------------- */
+
+        h3 {
+            margin-bottom: 10px;
+            font-size: 15px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .opps {
+            width: 496px;
+            border-radius: 4px;
+            box-sizing: border-box;
+            padding: 0 45px;
+            margin: 40px auto;
+            overflow: hidden;
+            border: 1px solid #b0afb5;
+            font-family: 'Open Sans', sans-serif;
+            color: #4f5365;
+        }
+
+        .opps-reminder {
+            position: relative;
+            top: -1px;
+            padding: 9px 0 10px;
+            font-size: 11px;
+            text-transform: uppercase;
+            text-align: center;
+            color: #ffffff;
+            background: #000000;
+        }
+
+        .opps-info {
+            margin-top: 26px;
+            position: relative;
+        }
+
+        .opps-info:after {
+            visibility: hidden;
+            display: block;
+            font-size: 0;
+            content: " ";
+            clear: both;
+            height: 0;
+
+        }
+
+        .opps-brand {
+            width: 45%;
+            float: left;
+        }
+
+        .opps-brand img {
+            max-width: 150px;
+            margin-top: 2px;
+        }
+
+        .opps-ammount {
+            width: 55%;
+            float: right;
+        }
+
+        .opps-ammount h2 {
+            font-size: 36px;
+            color: #000000;
+            line-height: 24px;
+            margin-bottom: 15px;
+        }
+
+        .opps-ammount h2 sup {
+            font-size: 16px;
+            position: relative;
+            top: -2px
+        }
+
+        .opps-ammount p {
+            font-size: 10px;
+            line-height: 14px;
+        }
+
+        .opps-reference {
+            margin-top: 14px;
+        }
+
+        h1 {
+            font-size: 27px;
+            color: #000000;
+            text-align: center;
+            margin-top: -1px;
+            padding: 6px 0 7px;
+            border: 1px solid #b0afb5;
+            border-radius: 4px;
+            background: #f8f9fa;
+        }
+
+        .opps-instructions {
+            margin: 32px -45px 0;
+            padding: 32px 45px 45px;
+            border-top: 1px solid #b0afb5;
+            background: #f8f9fa;
+        }
+
+        ol {
+            margin: 17px 0 0 16px;
+        }
+
+        li + li {
+            margin-top: 10px;
+            color: #000000;
+        }
+
+        a {
+            color: #1155cc;
+        }
+
+        .opps-footnote {
+            margin-top: 22px;
+            padding: 22px 20 24px;
+            color: #108f30;
+            text-align: center;
+            border: 1px solid #108f30;
+            border-radius: 4px;
+            background: #ffffff;
+        }
+    </style>
+</head>
+<body>
+<div class="opps">
+    <div class="opps-header">
+        <div class="opps-reminder">Ficha digital. No es necesario imprimir.</div>
+        <div class="opps-info">
+            <div class="opps-brand"><img src="data:image/png;base64,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" alt="OXXOPay"></div>
+            <div class="opps-ammount">
+                <h3>Monto a pagar</h3>
+                <h2>$ {{ amount|number_format(2) }} <sup>{{ currency }}</sup></h2>
+                <p>OXXO cobrará una comisión adicional al momento de realizar el pago.</p>
+            </div>
+        </div>
+        <div class="opps-reference">
+            <h3>Referencia</h3>
+            <h1>{{ reference|join('-') }}</h1>
+        </div>
+    </div>
+    <div class="opps-instructions">
+        <h3>Instrucciones</h3>
+        <ol>
+            <li>Acude a la tienda OXXO más cercana. <a href="https://www.google.com.mx/maps/search/oxxo/" target="_blank">Encuéntrala aquí</a>.</li>
+            <li>Indica en caja que quieres realizar un pago de <strong>OXXOPay</strong>.</li>
+            <li>Dicta al cajero el número de referencia en esta ficha para que tecleé directamete en la pantalla de venta.</li>
+            <li>Realiza el pago correspondiente con dinero en efectivo.</li>
+            <li>Al confirmar tu pago, el cajero te entregará un comprobante impreso. <strong>En el podrás verificar que se haya realizado correctamente.</strong> Conserva este comprobante de pago.</li>
+        </ol>
+        <div class="opps-footnote">Al completar estos pasos recibirás un correo de <strong>{{ bussines_name }}</strong> confirmando tu pago.</div>
+    </div>
+</div>
+</body>
+</html>

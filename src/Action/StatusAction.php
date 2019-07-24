@@ -11,6 +11,7 @@ declare(strict_types=1);
 
 namespace EncodeMedia\Payum\Conekta\Action;
 
+use EncodeMedia\Payum\Conekta\Api;
 use Payum\Core\Action\ActionInterface;
 use Payum\Core\Bridge\Spl\ArrayObject;
 use Payum\Core\Exception\RequestNotSupportedException;
@@ -34,13 +35,44 @@ class StatusAction implements ActionInterface
 
         $model = ArrayObject::ensureArrayObject($request->getModel());
 
-        if (! $model->offsetExists('webhook_status')) {
+        if ($model->offsetExists('error')) {
+            $request->markFailed();
+
+            return;
+        }
+
+        if (! $model->offsetExists('payment_status')) {
             $request->markNew();
 
             return;
         }
 
-        $request->markCaptured();
+        switch ($model->get('payment_status')) {
+            case Api::STATUS_PENDING_PAYMENT:
+                $request->markPending();
+                break;
+
+            case Api::STATUS_DECLINED:
+                $request->markFailed();
+                break;
+
+            case Api::STATUS_EXPIRED:
+                $request->markExpired();
+                break;
+
+            case Api::STATUS_PAID:
+                $request->markPayedout();
+                break;
+
+            case Api::STATUS_PARTIALLY_REFUNDED:
+            case Api::STATUS_REFUNDED:
+                $request->markRefunded();
+                break;
+
+            case Api::STATUS_PRE_AUTHORIZED:
+                $request->markAuthorized();
+                break;
+        }
     }
 
     /**

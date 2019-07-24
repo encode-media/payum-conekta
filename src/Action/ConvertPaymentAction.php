@@ -11,6 +11,7 @@ declare(strict_types=1);
 
 namespace EncodeMedia\Payum\Conekta\Action;
 
+use EncodeMedia\Payum\Conekta\Model\PaymentMethodInterface;
 use Payum\Core\Action\ActionInterface;
 use Payum\Core\Bridge\Spl\ArrayObject;
 use Payum\Core\Exception\LogicException;
@@ -61,6 +62,16 @@ class ConvertPaymentAction implements ActionInterface
                     'name' => $payment->getDescription(),
                     'unit_price' => $payment->getTotalAmount() * 100, // Centavos
                     'quantity' => 1,
+                ],
+            ];
+        }
+
+        if ($payment instanceof PaymentMethodInterface && ! $details->offsetExists('charges')) {
+            $details['charges'] = [
+                [
+                    'payment_method' => [
+                        'type' => $payment->getConektaPaymentMethod(),
+                    ],
                 ],
             ];
         }

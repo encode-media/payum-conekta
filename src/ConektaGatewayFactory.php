@@ -29,13 +29,15 @@ use Payum\Core\GatewayFactory;
  */
 class ConektaGatewayFactory extends GatewayFactory
 {
+    public const FACTORY_NAME = 'conekta';
+
     /**
      * {@inheritDoc}
      */
     protected function populateConfig(ArrayObject $config): void
     {
         $config->defaults([
-            'payum.factory_name' => 'conekta',
+            'payum.factory_name' => self::FACTORY_NAME,
             'payum.factory_title' => 'Conekta gateway',
             'payum.template.oxxo_pay' => '@PayumConekta/stub/oxxo_pay.html.twig',
             'payum.action.capture' => new CaptureAction(),

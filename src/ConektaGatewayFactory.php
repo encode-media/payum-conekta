@@ -39,7 +39,7 @@ class ConektaGatewayFactory extends GatewayFactory
         $config->defaults([
             'payum.factory_name' => self::FACTORY_NAME,
             'payum.factory_title' => 'Conekta gateway',
-            'payum.template.oxxo_pay' => '@PayumConekta/stub/oxxo_pay.html.twig',
+            'payum.template.oxxo_pay_stub' => '@PayumConekta/stub/oxxo_pay.html.twig',
             'payum.action.capture' => new CaptureAction(),
             'payum.action.authorize' => new AuthorizeAction(),
             'payum.action.refund' => new RefundAction(),

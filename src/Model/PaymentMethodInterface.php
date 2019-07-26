@@ -45,9 +45,9 @@ interface PaymentMethodInterface
     /**
      * Get ExpiresAt
      *
-     * @return \DateTimeInterface
+     * @return \DateTimeInterface|null
      */
-    public function getExpiresAt(): \DateTimeInterface;
+    public function getExpiresAt(): ?\DateTimeInterface;
 
     /**
      * Set Expires At

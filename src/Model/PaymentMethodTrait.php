@@ -24,6 +24,9 @@ trait PaymentMethodTrait
     /** @var string */
     private $conektaPaymentMethod;
 
+    /** @var \DateTimeInterface */
+    private $expiresAt;
+
     /**
      * Payment method
      *
@@ -56,5 +59,25 @@ trait PaymentMethodTrait
     public function setConektaCard(): void
     {
         $this->conektaPaymentMethod = Api::PAYMENT_CARD;
+    }
+
+    /**
+     * Get ExpiresAt
+     *
+     * @return \DateTimeInterface
+     */
+    public function getExpiresAt(): \DateTimeInterface
+    {
+        return $this->expiresAt;
+    }
+
+    /**
+     * Set Expires At
+     *
+     * @param \DateTimeInterface $expiresAt
+     */
+    public function setExpiresAt(\DateTimeInterface $expiresAt): void
+    {
+        $this->expiresAt = $expiresAt;
     }
 }

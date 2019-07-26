@@ -30,15 +30,29 @@ interface PaymentMethodInterface
     /**
      * Set oxxo pay
      */
-    public function setConektaOxxoPay();
+    public function setConektaOxxoPay(): void;
 
     /**
      * Set conekta spei
      */
-    public function setConektaSpei();
+    public function setConektaSpei(): void;
 
     /**
      * Set conekta card
      */
-    public function setConektaCard();
+    public function setConektaCard(): void;
+
+    /**
+     * Get ExpiresAt
+     *
+     * @return \DateTimeInterface
+     */
+    public function getExpiresAt(): \DateTimeInterface;
+
+    /**
+     * Set Expires At
+     *
+     * @param \DateTimeInterface $expiresAt
+     */
+    public function setExpiresAt(\DateTimeInterface $expiresAt): void;
 }

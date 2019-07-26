@@ -66,14 +66,20 @@ class ConvertPaymentAction implements ActionInterface
             ];
         }
 
-        if ($payment instanceof PaymentMethodInterface && ! $details->offsetExists('charges')) {
-            $details['charges'] = [
-                [
-                    'payment_method' => [
-                        'type' => $payment->getConektaPaymentMethod(),
+        if ($payment instanceof PaymentMethodInterface) {
+            if (! $details->offsetExists('charges')) {
+                $details['charges'] = [
+                    [
+                        'payment_method' => [
+                            'type' => $payment->getConektaPaymentMethod(),
+                        ],
                     ],
-                ],
-            ];
+                ];
+            }
+
+            if ($payment->getExpiresAt()) {
+                $details['charges'][0]['payment_method']['expires_at'] = $payment->getExpiresAt()->getTimestamp();
+            }
         }
 
         $details->validateNotEmpty(['customer_info']);

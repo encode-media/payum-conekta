@@ -78,7 +78,13 @@ class ConvertPaymentAction implements ActionInterface
             }
 
             if ($payment->getExpiresAt()) {
-                $details['charges'][0]['payment_method']['expires_at'] = $payment->getExpiresAt()->getTimestamp();
+                $details['charges'] = [
+                    array_merge_recursive($details['charges'][0], [
+                        'payment_method' => [
+                            'expires_at' => $payment->getExpiresAt()->getTimestamp(),
+                        ],
+                    ]),
+                ];
             }
         }
 

@@ -66,7 +66,7 @@ trait PaymentMethodTrait
      *
      * @return \DateTimeInterface
      */
-    public function getExpiresAt(): \DateTimeInterface
+    public function getExpiresAt(): ?\DateTimeInterface
     {
         return $this->expiresAt;
     }

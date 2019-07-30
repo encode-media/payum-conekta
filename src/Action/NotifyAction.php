@@ -14,6 +14,7 @@ namespace EncodeMedia\Payum\Conekta\Action;
 use EncodeMedia\Payum\Conekta\Action\Api\AbstractBaseApiAwareAction;
 use Payum\Core\Bridge\Spl\ArrayObject;
 use Payum\Core\Exception\RequestNotSupportedException;
+use Payum\Core\Request\GetHttpRequest;
 use Payum\Core\Request\Notify;
 
 /**
@@ -32,10 +33,9 @@ class NotifyAction extends AbstractBaseApiAwareAction
     public function execute($request): void
     {
         RequestNotSupportedException::assertSupports($this, $request);
-
-        $model = ArrayObject::ensureArrayObject($request->getModel());
-
-        throw new \LogicException('Not implemented notify');
+        $this->gateway->execute($httpRequest = new GetHttpRequest());
+        $details = ArrayObject::ensureArrayObject($request->getModel());
+        $details->replace($httpRequest->request);
     }
 
     /**

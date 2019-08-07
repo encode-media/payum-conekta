@@ -57,10 +57,11 @@ class ConvertPaymentAction implements ActionInterface
 
         // Items
         if (! $details->offsetExists('line_items')) {
+            $unitPrice = (int) ($payment->getTotalAmount() * 100);
             $details['line_items'] = [
                 [
                     'name' => $payment->getDescription(),
-                    'unit_price' => $payment->getTotalAmount() * 100, // Centavos
+                    'unit_price' => $unitPrice, // Centavos
                     'quantity' => 1,
                 ],
             ];
